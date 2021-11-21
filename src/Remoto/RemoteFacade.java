@@ -2,6 +2,7 @@ package Remoto;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +15,9 @@ import DTO.SesionDTO;
 import Dominio.Reto;
 import Dominio.Sesion;
 import Dominio.Usuario;
-import Servicios.BidAppService;
 import Servicios.LoginAppService;
-
+import Servicios.RetoAppService;
+import Servicios.SesiosAppService;
 
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {	
 	private static final long serialVersionUID = 1L;
@@ -26,7 +27,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	
 	//TODO: Remove this instances when Singleton Pattern is implemented
 	private LoginAppService loginService = new LoginAppService();
-	private BidAppService bidService = new BidAppService();
+	private RetoAppService retoService = new RetoAppService();
+	private SesiosAppService sesionService = new SesiosAppService();
 
 	public RemoteFacade() throws RemoteException {
 		super();		
@@ -71,7 +73,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade getSesion()");
 		
 		//Get Categories using BidAppService
-		List<Sesion> categories = bidService.getSesion();
+		List<Sesion> categories = new ArrayList<Sesion>();
+		categories.add(sesionService.getSesion());
 		
 		if (categories != null) {
 			//Convert domain object to DTO
@@ -82,11 +85,12 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	@Override
-	public List<RetoDTO> getRetos() throws RemoteException {
+	public ArrayList<RetoDTO> getRetos() throws RemoteException {
 		System.out.println(" * RemoteFacade getRetos()");
 		
 		//Get Categories using BidAppService
-		List<Reto> categories = bidService.getRetos();
+		List<Reto> categories = new ArrayList<Reto>();
+		categories.add(retoService.getReto());
 		
 		if (categories != null) {
 			//Convert domain object to DTO
@@ -95,20 +99,5 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			throw new RemoteException("getCategories() fails!");
 		}
 	}
-	
-	@Override
-	public boolean makeBid(long token, int article, float amount) throws RemoteException {		
-		System.out.println(" * RemoteFacade makeBid article : " + article + " / amount " + amount);
-		
-		if (this.serverState.containsKey(token)) {						
-			//Make the bid using Bid Application Service
-			if (bidService.makeBid(this.serverState.get(token), article, amount)) {
-				return true;
-			} else {
-				throw new RemoteException("makeBid() fails!");
-			}
-		} else {
-			throw new RemoteException("To place a bid you must first log in");
-		}
-	}
+
 }

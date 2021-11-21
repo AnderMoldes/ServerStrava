@@ -20,7 +20,6 @@ public class Reto {
 	private Date fecha_fin;
 	private double distanciaObjetivo;	
 	private String deporte;
-	private List<Bid> bids = new ArrayList<>();
 	
 	
 	public int getNumber() {
@@ -72,19 +71,7 @@ public class Reto {
 	public void setDeporte(String deporte) {
 		this.deporte = deporte;
 	}
-	public List<Bid> getBids() {
-		return bids;
-	}
-	
-	public void setBids(List<Bid> bids) {
-		this.bids = bids;
-	}
-	
-	public void addBid(Bid bid) {
-		if (bid != null && !this.bids.contains(bid)) {
-			this.bids.add(bid);
-		}
-	}
+
 	@Override
 	public String toString() { 
 

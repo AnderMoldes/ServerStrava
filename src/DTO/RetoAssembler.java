@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Dominio.Reto;
-
-
-//This class is part of the DTO pattern. It also implements Singleton Pattern.
 public class RetoAssembler {	
 	private static RetoAssembler instance;
 
@@ -29,12 +26,11 @@ public class RetoAssembler {
 		dto.setFecha_fin(article.getFecha_fin());
 		dto.setDistanciaObjetivo(article.getDistanciaObjetivo());
 		dto.setDeporte(article.getDeporte());
-				
 		return dto;
 	}
 	
-	public List<RetoDTO> retoToDTO(List<Reto> articles) {
-		List<RetoDTO> dtos = new ArrayList<>();
+	public ArrayList<RetoDTO> retoToDTO(List<Reto> articles) {
+		ArrayList<RetoDTO> dtos = new ArrayList<>();
 		
 		for (Reto article : articles) {
 			dtos.add(this.articleToDTO(article));

@@ -6,7 +6,7 @@ import Dominio.Reto;
 
 
 public class RetoAppService {
-	public Reto getReto(int number, String name, Date fecha_ini, Date fecha_fin, double dist, String deporte) {
+	public Reto getReto() {
 		//TODO: Get User using DAO and check 		
 		Reto reto = new Reto();
 		reto.setDeporte("Correr");

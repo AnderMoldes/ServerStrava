@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import Dominio.Bid;
 import Dominio.Sesion;
 
 //This class implements DTO pattern
@@ -20,7 +19,6 @@ public class UserDTO implements Serializable {
 	private String contrasenya;
 	private String frecuencia;
 	private List<Sesion> sesiones = new ArrayList<>();
-	private List<Bid> bids = new ArrayList<>();
 	public String getEmail() {
 		return email;
 	}

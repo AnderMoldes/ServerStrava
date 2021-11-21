@@ -15,7 +15,6 @@ public class Usuario{
 	private String contrasenya;
 	private String frecuencia;
 	private List<Sesion> sesiones = new ArrayList<>();
-	private List<Bid> bids = new ArrayList<>();
 	
 	public String getEmail() {
 		return email;
@@ -86,19 +85,6 @@ public class Usuario{
 	public void addSesiones(Sesion sesion) {
 		if (sesion != null && !this.sesiones.contains(sesion)) {
 			this.sesiones.add(sesion);
-		}
-	}
-	public List<Bid> getBids() {
-		return bids;
-	}
-	
-	public void setBids(List<Bid> bids) {
-		this.bids = bids;
-	}
-	
-	public void addBid(Bid bid) {
-		if (bid != null && !this.bids.contains(bid)) {
-			this.bids.add(bid);
 		}
 	}
 	
