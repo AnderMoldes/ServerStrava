@@ -43,7 +43,7 @@ public class BidAppService {
 		sesion.setDeporte("Ciclismo");
 		sesion.setDistancia(30);
 		sesion.setDuracion(1.5);
-		sesion.setFecha_inicio(new Date("2021-10-19"));
+		sesion.setFecha_inicio(new Date(2021-10-19));
 		sesion.setHora_inicio("9:00");
 		sesion.setNumber(1);
 		sesion.setPropietario(user1);
@@ -52,8 +52,8 @@ public class BidAppService {
 		Reto reto = new Reto();
 		reto.setDeporte("Correr");
 		reto.setDistanciaObjetivo(100);
-		reto.setFecha_inicio(new Date("2021-10-19"));
-		reto.setFecha_fin(new Date("2021-11-19"));
+		reto.setFecha_inicio(new Date(2021-12-11));
+		reto.setFecha_fin(new Date(2022-01-11));
 		reto.setName("100 km");
 		reto.setNumber(1);
 		//Add the Category to the local cache.
