@@ -11,7 +11,6 @@ import java.util.Locale;
 
 
 
-
 public class Reto {
 
 	private int number;
