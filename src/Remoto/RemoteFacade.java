@@ -17,6 +17,7 @@ import Dominio.Usuario;
 import Servicios.BidAppService;
 import Servicios.LoginAppService;
 
+
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {	
 	private static final long serialVersionUID = 1L;
 
@@ -85,7 +86,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade getRetos()");
 		
 		//Get Categories using BidAppService
-		List<Reto> categories = bidService.getReto();
+		List<Reto> categories = bidService.getRetos();
 		
 		if (categories != null) {
 			//Convert domain object to DTO

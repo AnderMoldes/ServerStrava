@@ -19,6 +19,7 @@ public class Sesion {
 	private String hora_inicio;
 	private double duracion;
 	private Usuario propietario;
+	private List<Sesion> sesiones;
 	
 	public int getNumber() {
 		return number;
@@ -48,8 +49,8 @@ public class Sesion {
 		return distancia;
 	}
 	
-	public void setDistancia(float distancia) {
-		this.distancia = distancia;
+	public void setDistancia(double d) {
+		this.distancia = d;
 	}
 	
 	public Date getFecha_inicio() {
@@ -82,6 +83,9 @@ public class Sesion {
 	
 	public void setPropietario(Usuario propietario) {
 		this.propietario = propietario;
+	}
+	public List<Sesion> getSesion() { 
+		return sesiones;
 	}
 	
 	@Override

@@ -17,7 +17,7 @@ import Dominio.Usuario;
 public class BidAppService {
 	
 	//TODO: remove when DAO Pattern is implemented
-	private List<Sesion> sesion = new ArrayList<>();
+	private ArrayList<Sesion> sesion = new ArrayList<>();
 	private List<Reto> retos = new ArrayList<>();
 	
 	public BidAppService() {
@@ -43,19 +43,21 @@ public class BidAppService {
 		sesion.setDeporte("Ciclismo");
 		sesion.setDistancia(30);
 		sesion.setDuracion(1.5);
-		sesion.setFecha_inicio(new Date(2021-10-19));
+//		sesion.setFecha_inicio(new Date(2021-10-19));
 		sesion.setHora_inicio("9:00");
 		sesion.setNumber(1);
 		sesion.setPropietario(user1);
 		sesion.setTitulo("Ciclismo 30 km");
+		sesion.setPropietario(user1);
 		//Create Articles				
 		Reto reto = new Reto();
 		reto.setDeporte("Correr");
 		reto.setDistanciaObjetivo(100);
-		reto.setFecha_inicio(new Date(2021-12-11));
-		reto.setFecha_fin(new Date(2022-01-11));
+//		reto.setFecha_inicio(new Date(2021-12-11));
+//		reto.setFecha_fin(new Date(2022-01-11));
 		reto.setName("100 km");
 		reto.setNumber(1);
+		user1.addSesiones(sesion);
 		//Add the Category to the local cache.
 		this.sesion.add(sesion);
 		//Add articles to local cahce
@@ -63,12 +65,26 @@ public class BidAppService {
 	}
 	
 	
-	public List<Sesion> getSesion() {
-		//TODO: Get all the categories using DAO Pattern		
-		return this.sesion;
+	public ArrayList<Sesion> getSesion() {
+		//TODO: Get all the categories using DAO Pattern	
+		ArrayList<Sesion> sesiones = new ArrayList<Sesion>();;
+		Sesion sesion = new Sesion();
+		for (Sesion cat : this.sesion) {
+			sesion.setTitulo(cat.getTitulo());
+			sesion.setDeporte(cat.getDeporte());
+			sesion.setDistancia(cat.getDistancia());
+			sesion.setDuracion(cat.getDuracion());
+			sesion.setNumber(cat.getNumber());
+//			sesion.setPropietario(cat.getPropietario());
+//			sesion.setFecha_inicio(cat.getFecha_inicio());
+//			sesion.setHora_inicio(cat.getHora_inicio());
+		
+			sesiones.add(sesion);
+		}
+		return sesiones;
 	}
 
-	public List<Reto> getReto() {
+	public List<Reto> getRetos() {
 		//TODO: Get articles of a category using DAO Pattern
 		return this.retos;
 
