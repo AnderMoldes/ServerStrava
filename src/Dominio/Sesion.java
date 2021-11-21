@@ -1,5 +1,6 @@
-package es.deusto.ingenieria.sd.auctions.server.data.domain;
+package Dominio;
 
+import java.time.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -13,10 +14,10 @@ public class Sesion {
 	private int number;
 	private String titulo;	
 	private String deporte;	
-	private Float distancia;	
-	private LocalDate fecha_inicio;	
-	private LocalTime hora_inicio;
-	private Float duracion;
+	private double distancia;	
+	private Date fecha_inicio;	
+	private String hora_inicio;
+	private double duracion;
 	private Usuario propietario;
 	
 	public int getNumber() {
@@ -43,36 +44,36 @@ public class Sesion {
 		this.deporte = deporte;
 	}
 	
-	public Float getDistancia() {
+	public double getDistancia() {
 		return distancia;
 	}
 	
-	public void setDistancia(Float distancia) {
+	public void setDistancia(float distancia) {
 		this.distancia = distancia;
 	}
 	
-	public LocalDate getFecha_inicio() {
+	public Date getFecha_inicio() {
 		return fecha_inicio;
 	}
 	
-	public void setFecha_inicio(LocalDate fecha_inicio) {
-		this.fecha_inicio = fecha_inicio;
+	public void setFecha_inicio(Date date) {
+		this.fecha_inicio = date;
 	}
 	
-	public LocalTime getHora_inicio() {
+	public String getHora_inicio() {
 		return hora_inicio;
 	}
 	
-	public void setHora_inicio(LocalTime hora_inicio) {
+	public void setHora_inicio(String hora_inicio) {
 		this.hora_inicio = hora_inicio;
 	}
 	
-	public Float getDuracion() {
+	public double getDuracion() {
 		return duracion;
 	}
 	
-	public void setDuracion(Float duracion) {
-		this.duracion = duracion;
+	public void setDuracion(double d) {
+		this.duracion = d;
 	}
 	
 	public Usuario getPropietario() {

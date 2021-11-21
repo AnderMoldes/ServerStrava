@@ -1,4 +1,4 @@
-package es.deusto.ingenieria.sd.auctions.server.data.domain;
+package Dominio;
 
 
 import java.time.LocalDate;
@@ -11,14 +11,16 @@ import java.util.Locale;
 
 
 
+
 public class Reto {
 
 	private int number;
 	private String name;	
-	private LocalDate fecha_inicio;
-	private LocalDate fecha_fin;
-	private Float distanciaObjetivo;	
+	private Date fecha_inicio;
+	private Date fecha_fin;
+	private double distanciaObjetivo;	
 	private String deporte;
+	private List<Bid> bids = new ArrayList<>();
 	
 	
 	public int getNumber() {
@@ -38,29 +40,29 @@ public class Reto {
 	}
 	
 	
-	public LocalDate getFecha_inicio() {
+	public Date getFecha_inicio() {
 		return fecha_inicio;
 	}
 	
-	public void setFecha_inicio(LocalDate fecha_inicio) {
-		this.fecha_inicio = fecha_inicio;
+	public void setFecha_inicio(Date date) {
+		this.fecha_inicio = date;
 	}
 	
-	public LocalDate getFecha_fin() {
+	public Date getFecha_fin() {
 		return fecha_fin;
 	}
 	
-	public void setFecha_fin(LocalDate fecha_fin) {
+	public void setFecha_fin(Date fecha_fin) {
 		this.fecha_fin = fecha_fin;
 	}
 	
 	
-	public Float getDistanciaObjetivo() {
+	public double getDistanciaObjetivo() {
 		return distanciaObjetivo;
 	}
 	
-	public void setDistanciaObjetivo(Float distanciaObjetivo) {
-		this.distanciaObjetivo = distanciaObjetivo;
+	public void setDistanciaObjetivo(double d) {
+		this.distanciaObjetivo = d;
 	}
 	
 	public String getDeporte() {
@@ -70,7 +72,19 @@ public class Reto {
 	public void setDeporte(String deporte) {
 		this.deporte = deporte;
 	}
+	public List<Bid> getBids() {
+		return bids;
+	}
 	
+	public void setBids(List<Bid> bids) {
+		this.bids = bids;
+	}
+	
+	public void addBid(Bid bid) {
+		if (bid != null && !this.bids.contains(bid)) {
+			this.bids.add(bid);
+		}
+	}
 	@Override
 	public String toString() { 
 

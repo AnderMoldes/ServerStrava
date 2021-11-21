@@ -1,9 +1,9 @@
-package es.deusto.ingenieria.sd.auctions.server;
+package Main;
 
 import java.rmi.Naming;
 
-import es.deusto.ingenieria.sd.auctions.server.remote.IRemoteFacade;
-import es.deusto.ingenieria.sd.auctions.server.remote.RemoteFacade;
+import Remoto.IRemoteFacade;
+import Remoto.RemoteFacade;
 
 public class MainProgram {
 

@@ -1,4 +1,4 @@
-package es.deusto.ingenieria.sd.auctions.server.remote;
+package Remoto;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -7,21 +7,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import es.deusto.ingenieria.sd.auctions.server.data.domain.Article;
-import es.deusto.ingenieria.sd.auctions.server.data.domain.Category;
-import es.deusto.ingenieria.sd.auctions.server.data.domain.User;
-import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleAssembler;
-import es.deusto.ingenieria.sd.auctions.server.data.dto.ArticleDTO;
-import es.deusto.ingenieria.sd.auctions.server.data.dto.CategoryAssembler;
-import es.deusto.ingenieria.sd.auctions.server.data.dto.CategoryDTO;
-import es.deusto.ingenieria.sd.auctions.server.services.BidAppService;
-import es.deusto.ingenieria.sd.auctions.server.services.LoginAppService;
+import DTO.RetoAssembler;
+import DTO.RetoDTO;
+import DTO.SesionAssembler;
+import DTO.SesionDTO;
+import Dominio.Reto;
+import Dominio.Sesion;
+import Dominio.Usuario;
+import Servicios.BidAppService;
+import Servicios.LoginAppService;
 
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {	
 	private static final long serialVersionUID = 1L;
 
 	//Data structure for manage Server State
-	private Map<Long, User> serverState = new HashMap<>();
+	private Map<Long, Usuario> serverState = new HashMap<>();
 	
 	//TODO: Remove this instances when Singleton Pattern is implemented
 	private LoginAppService loginService = new LoginAppService();
@@ -36,7 +36,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 				
 		//Perform login() using LoginAppService
-		User user = loginService.login(email, password);
+		Usuario user = loginService.login(email, password);
 			
 		//If login() success user is stored in the Server State
 		if (user != null) {
@@ -66,32 +66,32 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 	
 	@Override
-	public List<CategoryDTO> getCategories() throws RemoteException {
-		System.out.println(" * RemoteFacade getCategories()");
+	public List<SesionDTO> getSesion() throws RemoteException {
+		System.out.println(" * RemoteFacade getSesion()");
 		
 		//Get Categories using BidAppService
-		List<Category> categories = bidService.getCategories();
+		List<Sesion> categories = bidService.getSesion();
 		
 		if (categories != null) {
 			//Convert domain object to DTO
-			return CategoryAssembler.getInstance().categoryToDTO(categories);
+			return SesionAssembler.getInstance().categoryToDTO(categories);
 		} else {
-			throw new RemoteException("getCategories() fails!");
+			throw new RemoteException("getSesion() fails!");
 		}
 	}
 
 	@Override
-	public List<ArticleDTO> getArticles(String category) throws RemoteException {
-		System.out.println(" * RemoteFacade getArticle('" + category + "')");
-
-		//Get Articles using BidAppService
-		List<Article> articles = bidService.getArticles(category);
+	public List<RetoDTO> getRetos() throws RemoteException {
+		System.out.println(" * RemoteFacade getRetos()");
 		
-		if (articles != null) {
+		//Get Categories using BidAppService
+		List<Reto> categories = bidService.getReto();
+		
+		if (categories != null) {
 			//Convert domain object to DTO
-			return ArticleAssembler.getInstance().articleToDTO(articles);
+			return RetoAssembler.getInstance().retoToDTO(categories);
 		} else {
-			throw new RemoteException("getArticles() fails!");
+			throw new RemoteException("getCategories() fails!");
 		}
 	}
 	
@@ -108,34 +108,6 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			}
 		} else {
 			throw new RemoteException("To place a bid you must first log in");
-		}
-	}
-
-	@Override
-	public float getUSDRate() throws RemoteException {
-		System.out.println(" * RemoteFacade get USD rate");
-
-		//Get rate using BidAppService
-		float rate = bidService.getUSDRate();
-		
-		if (rate != -1) {
-			return rate;
-		} else {
-			throw new RemoteException("getUSDRate() fails!");
-		}
-	}
-
-	@Override
-	public float getGBPRate() throws RemoteException {
-		System.out.println(" * RemoteFacade get GBP rate");
-		
-		//Get rate using BidAppService
-		float rate = bidService.getGBPRate();
-		
-		if (rate != -1) {
-			return rate;
-		} else {
-			throw new RemoteException("getGBPRate() fails!");
 		}
 	}
 }

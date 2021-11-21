@@ -1,4 +1,4 @@
-package es.deusto.ingenieria.sd.auctions.server.data.dto;
+package DTO;
 
 import java.io.Serializable;
 

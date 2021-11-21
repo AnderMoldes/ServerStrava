@@ -1,4 +1,4 @@
-package es.deusto.ingenieria.sd.auctions.server.data.domain;
+package Dominio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +11,33 @@ public class Usuario {
 	private String name;
 	private LocalDate fecha_ncto;
 	private float peso;
+	private String contrasenya;
 	private String frecuencia;
 	private List<Sesion> sesiones = new ArrayList<>();
-	
+	private List<Bid> bids = new ArrayList<>();
 	
 	public String getEmail() {
 		return email;
 	}
 	
+	
+	public String getContrasenya() {
+		return contrasenya;
+	}
+	public boolean comprobarContrasenya(String password) {
+		return this.contrasenya.equals(password);
+	}
+
+	public void setContrasenya(String contrasenya) {
+		this.contrasenya = contrasenya;
+	}
+
+
+	public void setPeso(float peso) {
+		this.peso = peso;
+	}
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -68,6 +87,19 @@ public class Usuario {
 			this.sesiones.add(sesion);
 		}
 	}
+	public List<Bid> getBids() {
+		return bids;
+	}
+	
+	public void setBids(List<Bid> bids) {
+		this.bids = bids;
+	}
+	
+	public void addBid(Bid bid) {
+		if (bid != null && !this.bids.contains(bid)) {
+			this.bids.add(bid);
+		}
+	}
 	
 		
 	@Override
@@ -77,6 +109,8 @@ public class Usuario {
 		result.append(this.email);
 		result.append(" - (");
 		result.append(this.name);
+		result.append(" - ");
+		result.append(this.contrasenya);
 		result.append(" - ");
 		result.append(this.fecha_ncto);
 		result.append(" - (");
