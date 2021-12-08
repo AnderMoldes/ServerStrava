@@ -1,6 +1,7 @@
 package Dominio;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,8 +11,8 @@ public class Usuario{
 
 	private String email;
 	private String name;
-	private LocalDate fecha_ncto;
-	private float peso;
+	private Date fecha_ncto;
+	private double peso;
 	private String contrasenya;
 	private String frecuencia;
 	private List<Sesion> sesiones = new ArrayList<>();
@@ -33,10 +34,6 @@ public class Usuario{
 	}
 
 
-	public void setPeso(float peso) {
-		this.peso = peso;
-	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -50,22 +47,27 @@ public class Usuario{
 		this.name = name;
 	}
 	
-	public LocalDate getFecha_ncto() {
+	
+	public Date getFecha_ncto() {
 		return fecha_ncto;
 	}
-	
-	public void setFecha_ncto(LocalDate fecha_ncto) {
+
+
+	public void setFecha_ncto(Date fecha_ncto) {
 		this.fecha_ncto = fecha_ncto;
 	}
-	
-	public Float getPeso() {
+
+
+	public double getPeso() {
 		return peso;
 	}
-	
-	public void setPeso(Float peso) {
+
+
+	public void setPeso(double peso) {
 		this.peso = peso;
 	}
-	
+
+
 	public String getFrecuencia() {
 		return frecuencia;
 	}

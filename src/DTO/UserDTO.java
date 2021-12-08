@@ -15,7 +15,7 @@ public class UserDTO implements Serializable {
 	private String email;
 	private String name;
 	private Date fecha_ncto;
-	private float peso;
+	private double peso;
 	private String contrasenya;
 	private String frecuencia;
 	private List<Sesion> sesiones = new ArrayList<>();
@@ -37,10 +37,12 @@ public class UserDTO implements Serializable {
 	public void setFecha_ncto(Date fecha_ncto) {
 		this.fecha_ncto = fecha_ncto;
 	}
-	public float getPeso() {
+
+
+	public double getPeso() {
 		return peso;
 	}
-	public void setPeso(float peso) {
+	public void setPeso(double peso) {
 		this.peso = peso;
 	}
 	public String getContrasenya() {

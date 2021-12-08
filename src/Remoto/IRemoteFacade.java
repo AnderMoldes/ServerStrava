@@ -17,5 +17,8 @@ public interface IRemoteFacade extends Remote {
 	public List<SesionDTO> getSesion() throws RemoteException;
 	
 	public List<RetoDTO> getRetos() throws RemoteException;
-		
+	
+	public long loginGoogle(String email, String password) throws RemoteException;
+	
+	public String comprobar() throws RemoteException;
 }

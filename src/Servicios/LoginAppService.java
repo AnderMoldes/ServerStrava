@@ -1,6 +1,7 @@
 package Servicios;
 
 import Dominio.Usuario;
+import Gateway.LoginGateway;
 
 //TODO: Implement Singleton Pattern
 public class LoginAppService {
@@ -19,5 +20,19 @@ public class LoginAppService {
 		} else {
 			return null;
 		}
+	}
+	public long loginGoogle(String email, String password) {
+		Usuario user = new Usuario();		
+		user.setEmail("thomas.e2001@gmail.com");
+		user.setContrasenya("$!9PhNz,");
+		if (user.getEmail().equals(email) && user.comprobarContrasenya(password)) {		
+			return LoginGateway.getInstance().login(email, password);
+		} else {
+			return 0;
+		}
+	
+	}
+	public String comprobar() {
+		return LoginGateway.getInstance().comprobar();		
 	}
 }

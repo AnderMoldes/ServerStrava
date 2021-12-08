@@ -99,5 +99,26 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			throw new RemoteException("getCategories() fails!");
 		}
 	}
-
+	public long loginGoogle(String email, String password) throws RemoteException {
+		System.out.println(" * RemoteFacade loginGoogle(): " + email + " / " + password);
+				
+		long login = loginService.loginGoogle(email, password);
+		
+		if (login != -1) {
+			return login;
+		} else {
+			throw new RemoteException("loginGoogle() fails!");
+		}
+	}
+	public String comprobar() throws RemoteException {
+		System.out.println(" * RemoteFacade comprobar()");
+		
+		String resultado = loginService.comprobar();
+		
+		if (resultado != "") {
+			return resultado;
+		} else {
+			throw new RemoteException("comprobar() fails!");
+		}
+	}
 }
