@@ -26,7 +26,7 @@ public class LoginAppService {
 		user.setEmail("thomas.e2001@gmail.com");
 		user.setContrasenya("$!9PhNz,");
 		if (user.getEmail().equals(email) && user.comprobarContrasenya(password)) {		
-			return LoginGateway.getInstance().login(email, password);
+			return LoginGateway.getInstance().loginGoogle(email, password);
 		} else {
 			return 0;
 		}

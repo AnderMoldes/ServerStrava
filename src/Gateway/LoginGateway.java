@@ -12,7 +12,7 @@ public class LoginGateway {
 	
 	private LoginGateway() {
 		try {		
-			String URL = "//127.0.0.1:1099/CurrencyExchange";
+			String URL = "//127.0.0.1:1099/Google";
 			this.currencyConvService = (ILogin) Naming.lookup(URL);
 		} catch (Exception ex) {
 			System.err.println("# Error locating remote fa�ade: " + ex);
@@ -27,7 +27,7 @@ public class LoginGateway {
 		return instance;
 	}
 	
-	public long login(String email, String password) {
+	public long loginGoogle(String email, String password) {
 		System.out.println("Haciendo login...");
 		try {
 			return this.currencyConvService.loginGoogle(email, password);
@@ -49,5 +49,6 @@ public class LoginGateway {
 			return "";
 		}		
 	}
+
 
 }
