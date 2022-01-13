@@ -20,13 +20,15 @@
 	<target name="1.build" description="Builds the project">
 		<delete dir="${bin.dir}"/>
 		<mkdir dir="${bin.dir}"/>
-		<javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" deprecation="true" fork="true" includeantruntime="no"/>
+    	<javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref="classpath" includeantruntime="false" fork="true">
+            <include name="**/*.java"/>
+         </javac>
     </target>
 		
 	<target name="2.export" depends="1.build" description="Export classes into a .jar file">
 		<delete dir="${dist.dir}"/>
 		<mkdir dir="${dist.dir}"/>
-		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/Remoto/I**.class, **/DTO/**.class, **/Gateway/**.class, **/Servicios/**.class, **/Dominio/**.class"/>
+		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/Remoto/I**.class, **/DTO/**.class, **/Gateway/L**.class, **/Servicios/**.class, **/Dominio/**.class"/>
 	</target>
 	
 	<target name="3.local.test" depends="1.build" description="Runs local repository test">
