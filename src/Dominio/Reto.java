@@ -9,16 +9,32 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.jdo.annotations.Join;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 
+@PersistenceCapable
 public class Reto {
-
+	@PrimaryKey
 	private int number;
 	private String name;	
 	private Date fecha_inicio;
 	private Date fecha_fin;
 	private double distanciaObjetivo;	
 	private String deporte;
+	
+	@Persistent(defaultFetchGroup="true")
+	private Usuario usuario;
+	
+	@Join
+	//This annotation maps the 1-N relationship as an intermediate table.
+	@Persistent(mappedBy="article", dependentElement="true", defaultFetchGroup="true")
+	//"mappedBy" indicates the name of the attribute defining the relationship at the other end
+	//"dependentElement" indicates that the objects in the list are automatically deleted from 
+	//the DB when this object is deleted.
+
 	
 	
 	public int getNumber() {
@@ -59,6 +75,14 @@ public class Reto {
 		return distanciaObjetivo;
 	}
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public void setDistanciaObjetivo(double d) {
 		this.distanciaObjetivo = d;
 	}

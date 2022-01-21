@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.jdo.annotations.PersistenceCapable;
+@PersistenceCapable
 public class Sesion {
 
 	private int number;

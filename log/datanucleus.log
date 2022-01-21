@@ -1,0 +1,28 @@
+14:03:02,481 (main) ERROR [DataNucleus.Datastore.Schema] - No hay clases !
+14:03:02,482 (main) ERROR [DataNucleus.SchemaTool] - DataNucleus SchemaTool ha lanzado una excepción. Por favor consulte el Log para ver más detalles: No hay clases !
+No hay clases !
+org.datanucleus.exceptions.NucleusException: No hay clases !
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.createSchemaForClasses(RDBMSStoreManager.java:3998)
+	at org.datanucleus.store.schema.SchemaTool.createSchemaForClasses(SchemaTool.java:508)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:424)
+14:04:18,564 (main) ERROR [DataNucleus.Datastore.Schema] - No hay clases !
+14:04:18,569 (main) ERROR [DataNucleus.SchemaTool] - DataNucleus SchemaTool ha lanzado una excepción. Por favor consulte el Log para ver más detalles: No hay clases !
+No hay clases !
+org.datanucleus.exceptions.NucleusException: No hay clases !
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.createSchemaForClasses(RDBMSStoreManager.java:3998)
+	at org.datanucleus.store.schema.SchemaTool.createSchemaForClasses(SchemaTool.java:508)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:424)
+13:26:15,852 (main) ERROR [DataNucleus.Datastore.Schema] - No hay clases !
+13:26:15,853 (main) ERROR [DataNucleus.SchemaTool] - DataNucleus SchemaTool ha lanzado una excepción. Por favor consulte el Log para ver más detalles: No hay clases !
+No hay clases !
+org.datanucleus.exceptions.NucleusException: No hay clases !
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.deleteSchemaForClasses(RDBMSStoreManager.java:4320)
+	at org.datanucleus.store.schema.SchemaTool.deleteSchemaForClasses(SchemaTool.java:513)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:428)
+13:26:35,243 (main) ERROR [DataNucleus.Datastore.Schema] - No hay clases !
+13:26:35,244 (main) ERROR [DataNucleus.SchemaTool] - DataNucleus SchemaTool ha lanzado una excepción. Por favor consulte el Log para ver más detalles: No hay clases !
+No hay clases !
+org.datanucleus.exceptions.NucleusException: No hay clases !
+	at org.datanucleus.store.rdbms.RDBMSStoreManager.createSchemaForClasses(RDBMSStoreManager.java:3998)
+	at org.datanucleus.store.schema.SchemaTool.createSchemaForClasses(SchemaTool.java:508)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:424)

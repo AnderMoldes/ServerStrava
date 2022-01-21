@@ -3,10 +3,13 @@ package Dominio;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.jdo.annotations.PersistenceCapable;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
-
+@PersistenceCapable
 public class Usuario{
 
 	private String email;
