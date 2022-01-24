@@ -27,7 +27,7 @@
    		<enhancer classpathref="classpath" failonerror="true">
             <sysproperty key="log4j.configuration" value="file:${resources.dir}/log4j.properties"/>
             <fileset dir="${bin.dir}">
-                <include name="**/*.class"/>
+                <include name="**/Dominio/*.class"/>
             </fileset>
    		</enhancer>
     </target>

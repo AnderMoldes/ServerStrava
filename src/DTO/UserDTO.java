@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import Dominio.Sesion;
+import Dominio.Sesiones;
 
 //This class implements DTO pattern
 public class UserDTO implements Serializable {	
@@ -18,7 +18,7 @@ public class UserDTO implements Serializable {
 	private double peso;
 	private String contrasenya;
 	private String frecuencia;
-	private List<Sesion> sesiones = new ArrayList<>();
+	private List<Sesiones> sesiones = new ArrayList<>();
 	public String getEmail() {
 		return email;
 	}
@@ -57,10 +57,10 @@ public class UserDTO implements Serializable {
 	public void setFrecuencia(String frecuencia) {
 		this.frecuencia = frecuencia;
 	}
-	public List<Sesion> getSesiones() {
+	public List<Sesiones> getSesiones() {
 		return sesiones;
 	}
-	public void setSesiones(List<Sesion> sesiones) {
+	public void setSesiones(List<Sesiones> sesiones) {
 		this.sesiones = sesiones;
 	}
 	

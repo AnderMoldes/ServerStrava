@@ -1,14 +1,14 @@
 package Servicios;
 
-import Dominio.Usuario;
+import Dominio.Usuarios;
 import Gateway.LoginGateway;
 
 //TODO: Implement Singleton Pattern
 public class LoginAppService {
 		
-	public Usuario login(String email, String password) {
+	public Usuarios login(String email, String password) {
 		//TODO: Get User using DAO and check 		
-		Usuario user = new Usuario();		
+		Usuarios user = new Usuarios();		
 		user.setEmail("thomas.e2001@gmail.com");
 		user.setName("Thomas");		
 		//Generate the hash of the password
@@ -22,7 +22,7 @@ public class LoginAppService {
 		}
 	}
 	public long loginGoogle(String email, String password) {
-		Usuario user = new Usuario();		
+		Usuarios user = new Usuarios();		
 		user.setEmail("thomas.e2001@gmail.com");
 		user.setContrasenya("$!9PhNz,");
 		if (user.getEmail().equals(email) && user.comprobarContrasenya(password)) {		

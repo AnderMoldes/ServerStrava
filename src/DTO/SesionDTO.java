@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.Locale;
 
-import Dominio.Usuario;
+import Dominio.Usuarios;
 
 //This class implements DTO pattern
 public class SesionDTO implements Serializable {	
@@ -21,7 +21,7 @@ public class SesionDTO implements Serializable {
 	private Date fecha_inicio;	
 	private String hora_inicio;
 	private double duracion;
-	private Usuario propietario;
+	private Usuarios propietario;
 
 	
 
@@ -81,11 +81,11 @@ public class SesionDTO implements Serializable {
 		this.duracion = d;
 	}
 
-	public Usuario getPropietario() {
+	public Usuarios getPropietario() {
 		return propietario;
 	}
 
-	public void setPropietario(Usuario propietario) {
+	public void setPropietario(Usuarios propietario) {
 		this.propietario = propietario;
 	}
 

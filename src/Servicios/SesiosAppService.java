@@ -2,13 +2,13 @@ package Servicios;
 
 import java.util.Date;
 
-import Dominio.Sesion;
-import Dominio.Usuario;
+import Dominio.Sesiones;
+import Dominio.Usuarios;
 
 public class SesiosAppService {
-	public Sesion getSesion() {
+	public Sesiones getSesion() {
 		//TODO: Get User using DAO and check 		
-		Sesion sesion = new Sesion();
+		Sesiones sesion = new Sesiones();
 		sesion.setDeporte("Ciclismo");
 		sesion.setDistancia(30);
 		sesion.setDuracion(1.5);

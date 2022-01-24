@@ -1,18 +1,14 @@
 package Dominio;
 
-import java.time.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.jdo.annotations.PersistenceCapable;
-@PersistenceCapable
-public class Sesion {
+import javax.jdo.annotations.Join;
 
+@PersistenceCapable
+public class Sesiones {
 	private int number;
 	private String titulo;	
 	private String deporte;	
@@ -20,9 +16,11 @@ public class Sesion {
 	private Date fecha_inicio;	
 	private String hora_inicio;
 	private double duracion;
-	private Usuario propietario;
-	private List<Sesion> sesiones;
+	private Usuarios propietario;
+	@Join
+	private List<Sesiones> sesiones;
 	
+    
 	public int getNumber() {
 		return number;
 	}
@@ -79,14 +77,17 @@ public class Sesion {
 		this.duracion = d;
 	}
 	
-	public Usuario getPropietario() {
+	public Usuarios getPropietario() {
 		return propietario;
 	}
 	
-	public void setPropietario(Usuario propietario) {
+	public void setPropietario(Usuarios propietario) {
 		this.propietario = propietario;
 	}
-	public List<Sesion> getSesion() { 
+	public void removePropietario() {
+		sesiones.remove(propietario);
+	}
+	public List<Sesiones> getSesion() { 
 		return sesiones;
 	}
 	
@@ -121,7 +122,7 @@ public class Sesion {
 	@Override
 	public boolean equals(Object obj) {
 		if (this.getClass().getName().equals(obj.getClass().getName())) {
-			return this.number == ((Sesion)obj).number;
+			return this.number == ((Sesiones)obj).number;
 		}
 		
 		return false;

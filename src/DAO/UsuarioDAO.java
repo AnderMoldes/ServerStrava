@@ -8,8 +8,8 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import Dominio.Usuario;
-public class UsuarioDAO extends DataAccessObjectBase implements IDataAccessObject<Usuario> {
+import Dominio.Usuarios;
+public class UsuarioDAO extends DataAccessObjectBase implements IDataAccessObject<Usuarios> {
 	private static UsuarioDAO instance;	
 	
 	private UsuarioDAO() { }
@@ -23,28 +23,28 @@ public class UsuarioDAO extends DataAccessObjectBase implements IDataAccessObjec
 	}	
 	
 	@Override
-	public void save(Usuario object) {
+	public void save(Usuarios object) {
 		super.saveObject(object);
 	}
 
 	@Override
-	public void delete(Usuario object) {
+	public void delete(Usuarios object) {
 		super.deleteObject(object);
 	}
 
 	@Override
-	public List<Usuario> getAll() {
+	public List<Usuarios> getAll() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		
-		List<Usuario> users = new ArrayList<>();
+		List<Usuarios> users = new ArrayList<>();
 
 		try {
 			tx.begin();
 			
-			Extent<Usuario> userExtent = pm.getExtent(Usuario.class, true);
+			Extent<Usuarios> userExtent = pm.getExtent(Usuarios.class, true);
 			
-			for (Usuario user : userExtent) {
+			for (Usuarios user : userExtent) {
 				users.add(user);
 			}
 						
@@ -63,18 +63,18 @@ public class UsuarioDAO extends DataAccessObjectBase implements IDataAccessObjec
 	}
 
 	@Override
-	public Usuario find(String param) {		
+	public Usuarios find(String param) {		
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
-		Usuario result = null; 
+		Usuarios result = null; 
 
 		try {
 			tx.begin();
 			
-			Query<?> query = pm.newQuery("SELECT FROM " + Usuario.class.getName() + " WHERE email == '" + param + "'");
+			Query<?> query = pm.newQuery("SELECT FROM " + Usuarios.class.getName() + " WHERE email == '" + param + "'");
 			query.setUnique(true);
-			result = (Usuario) query.execute();
+			result = (Usuarios) query.execute();
 			
 			tx.commit();
 		} catch (Exception ex) {

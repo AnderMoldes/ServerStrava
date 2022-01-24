@@ -8,9 +8,9 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
-import Dominio.Reto;
+import Dominio.Retos;
 
-public class RetoDAO extends DataAccessObjectBase implements IDataAccessObject<Reto> {
+public class RetoDAO extends DataAccessObjectBase implements IDataAccessObject<Retos> {
 	private static RetoDAO instance;	
 	
 	private RetoDAO() { }
@@ -24,28 +24,28 @@ public class RetoDAO extends DataAccessObjectBase implements IDataAccessObject<R
 	}
 	
 	@Override
-	public void save(Reto object) {
+	public void save(Retos object) {
 		super.saveObject(object);
 	}
 
 	@Override
-	public void delete(Reto object) {
+	public void delete(Retos object) {
 		super.deleteObject(object);
 	}
 
 	@Override
-	public List<Reto> getAll() {				
+	public List<Retos> getAll() {				
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
-		List<Reto> articles = new ArrayList<>();
+		List<Retos> articles = new ArrayList<>();
 		
 		try {
 			tx.begin();
 			
-			Extent<Reto> extent = pm.getExtent(Reto.class, true);
+			Extent<Retos> extent = pm.getExtent(Retos.class, true);
 
-			for (Reto category : extent) {
+			for (Retos category : extent) {
 				articles.add(category);
 			}
 
@@ -64,18 +64,18 @@ public class RetoDAO extends DataAccessObjectBase implements IDataAccessObject<R
 	}
 
 	@Override
-	public Reto find(String param) {
+	public Retos find(String param) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		
-		Reto result = null; 
+		Retos result = null; 
 
 		try {
 			tx.begin();
 						
-			Query<?> query = pm.newQuery("SELECT FROM " + Reto.class.getName() + " WHERE number == " + param);
+			Query<?> query = pm.newQuery("SELECT FROM " + Retos.class.getName() + " WHERE number == " + param);
 			query.setUnique(true);
-			result = (Reto) query.execute();
+			result = (Retos) query.execute();
 			
 			tx.commit();
 		} catch (Exception ex) {

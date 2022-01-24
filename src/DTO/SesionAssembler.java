@@ -5,8 +5,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import Dominio.Sesion;
-import Dominio.Usuario;
+import Dominio.Sesiones;
+import Dominio.Usuarios;
 
 
 //This class is part of the DTO pattern. It also implements Singleton Pattern.
@@ -22,7 +22,7 @@ public class SesionAssembler {
 		return instance;
 	}
 
-	public SesionDTO sesionToDTO(Sesion category) {
+	public SesionDTO sesionToDTO(Sesiones category) {
 		SesionDTO dto = new SesionDTO();		
 		dto.setNumber(category.getNumber());
 		dto.setTitulo(category.getTitulo());
@@ -35,10 +35,10 @@ public class SesionAssembler {
 		return dto;
 	}
 
-	public List<SesionDTO> categoryToDTO(List<Sesion> categories) {		
+	public List<SesionDTO> categoryToDTO(List<Sesiones> categories) {		
 		List<SesionDTO> dtos = new ArrayList<>();
 		
-		for (Sesion category : categories) {
+		for (Sesiones category : categories) {
 			dtos.add(this.sesionToDTO(category));
 		}
 		

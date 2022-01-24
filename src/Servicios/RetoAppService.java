@@ -2,13 +2,13 @@ package Servicios;
 
 import java.util.Date;
 
-import Dominio.Reto;
+import Dominio.Retos;
 
 
 public class RetoAppService {
-	public Reto getReto() {
+	public Retos getReto() {
 		//TODO: Get User using DAO and check 		
-		Reto reto = new Reto();
+		Retos reto = new Retos();
 		reto.setDeporte("Correr");
 		reto.setDistanciaObjetivo(100);
 		reto.setFecha_inicio(new Date(2021-12-11));

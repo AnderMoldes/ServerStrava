@@ -1,25 +1,28 @@
 package Dominio;
-
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.jdo.annotations.PersistenceCapable;
-
-import java.io.Serializable;
-import java.time.LocalDate;
+import javax.jdo.annotations.Join;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
-public class Usuario{
-
+public class Usuarios {
+	@PrimaryKey
 	private String email;
 	private String name;
 	private Date fecha_ncto;
 	private double peso;
 	private String contrasenya;
 	private String frecuencia;
-	private List<Sesion> sesiones = new ArrayList<>();
-	
+
+	@Join
+	@Persistent(mappedBy="propietario", dependentElement="true")
+	private List<Sesiones> sesiones = new ArrayList<>();
+	@Join
+
 	public String getEmail() {
 		return email;
 	}
@@ -79,15 +82,15 @@ public class Usuario{
 		this.frecuencia = frecuencia;
 	}
 	
-	public List<Sesion> getSesiones() {
+	public List<Sesiones> getSesiones() {
 		return sesiones;
 	}
 	
-	public void setSesiones(List<Sesion> sesiones) {
+	public void setSesiones(List<Sesiones> sesiones) {
 		this.sesiones = sesiones;
 	}
 	
-	public void addSesiones(Sesion sesion) {
+	public void addSesiones(Sesiones sesion) {
 		if (sesion != null && !this.sesiones.contains(sesion)) {
 			this.sesiones.add(sesion);
 		}
@@ -119,7 +122,7 @@ public class Usuario{
 	@Override
 	public boolean equals(Object obj) {
 		if (this.getClass().getName().equals(obj.getClass().getName())) {
-			return this.email.equals(((Usuario)obj).email);
+			return this.email.equals(((Usuarios)obj).email);
 		}
 		
 		return false;

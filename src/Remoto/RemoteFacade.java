@@ -12,9 +12,9 @@ import DTO.RetoAssembler;
 import DTO.RetoDTO;
 import DTO.SesionAssembler;
 import DTO.SesionDTO;
-import Dominio.Reto;
-import Dominio.Sesion;
-import Dominio.Usuario;
+import Dominio.Retos;
+import Dominio.Sesiones;
+import Dominio.Usuarios;
 import Servicios.LoginAppService;
 import Servicios.RetoAppService;
 import Servicios.SesiosAppService;
@@ -23,7 +23,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	private static final long serialVersionUID = 1L;
 
 	//Data structure for manage Server State
-	private Map<Long, Usuario> serverState = new HashMap<>();
+	private Map<Long, Usuarios> serverState = new HashMap<>();
 	
 	//TODO: Remove this instances when Singleton Pattern is implemented
 	private LoginAppService loginService = new LoginAppService();
@@ -39,7 +39,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 				
 		//Perform login() using LoginAppService
-		Usuario user = loginService.login(email, password);
+		Usuarios user = loginService.login(email, password);
 			
 		//If login() success user is stored in the Server State
 		if (user != null) {
@@ -73,7 +73,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade getSesion()");
 		
 		//Get Categories using BidAppService
-		List<Sesion> categories = new ArrayList<Sesion>();
+		List<Sesiones> categories = new ArrayList<Sesiones>();
 		categories.add(sesionService.getSesion());
 		
 		if (categories != null) {
@@ -89,7 +89,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade getRetos()");
 		
 		//Get Categories using BidAppService
-		List<Reto> categories = new ArrayList<Reto>();
+		List<Retos> categories = new ArrayList<Retos>();
 		categories.add(retoService.getReto());
 		
 		if (categories != null) {

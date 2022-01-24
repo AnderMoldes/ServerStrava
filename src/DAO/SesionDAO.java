@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.jdo.*;
 
-import Dominio.Sesion;
+import Dominio.Sesiones;
 
-public class SesionDAO extends DataAccessObjectBase implements IDataAccessObject<Sesion> {
+public class SesionDAO extends DataAccessObjectBase implements IDataAccessObject<Sesiones> {
 	private static SesionDAO instance;	
 	
 	private SesionDAO() { }
@@ -21,28 +21,28 @@ public class SesionDAO extends DataAccessObjectBase implements IDataAccessObject
 	}
 	
 	@Override
-	public void save(Sesion object) {
+	public void save(Sesiones object) {
 		super.saveObject(object);
 	}
 
 	@Override
-	public void delete(Sesion object) {
+	public void delete(Sesiones object) {
 		super.deleteObject(object);
 	}
 
 	@Override
-	public List<Sesion> getAll() {				
+	public List<Sesiones> getAll() {				
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
-		List<Sesion> articles = new ArrayList<>();
+		List<Sesiones> articles = new ArrayList<>();
 		
 		try {
 			tx.begin();
 			
-			Extent<Sesion> extent = pm.getExtent(Sesion.class, true);
+			Extent<Sesiones> extent = pm.getExtent(Sesiones.class, true);
 
-			for (Sesion category : extent) {
+			for (Sesiones category : extent) {
 				articles.add(category);
 			}
 
@@ -61,18 +61,18 @@ public class SesionDAO extends DataAccessObjectBase implements IDataAccessObject
 	}
 
 	@Override
-	public Sesion find(String param) {
+	public Sesiones find(String param) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		
-		Sesion result = null; 
+		Sesiones result = null; 
 
 		try {
 			tx.begin();
 						
-			Query<?> query = pm.newQuery("SELECT FROM " + Sesion.class.getName() + " WHERE number == " + param);
+			Query<?> query = pm.newQuery("SELECT FROM " + Sesiones.class.getName() + " WHERE number == " + param);
 			query.setUnique(true);
-			result = (Sesion) query.execute();
+			result = (Sesiones) query.execute();
 			
 			tx.commit();
 		} catch (Exception ex) {

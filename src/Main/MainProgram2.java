@@ -2,11 +2,20 @@ package Main;
 
 import java.rmi.Naming;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.jdo.Extent;
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
+import javax.jdo.Transaction;
 
 import DAO.UsuarioDAO;
-import Dominio.Reto;
-import Dominio.Sesion;
-import Dominio.Usuario;
+import Dominio.Retos;
+import Dominio.Sesiones;
+import Dominio.Usuarios;
 import Remoto.IRemoteFacade;
 import Remoto.RemoteFacade;
 
@@ -14,80 +23,225 @@ import Remoto.RemoteFacade;
 public class MainProgram2 {
 
 	public static void main(String[] args) {	
-		//Activate Security Manager. It is needed for RMI.
-		if (System.getSecurityManager() == null) {
-			System.setSecurityManager(new SecurityManager());
-		}
-
-		//args[0] = RMIRegistry IP
-		//args[1] = RMIRegistry Port
-		//args[2] = Service Name
-		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];		
-		
-		//Initialize DB
-		initDB();
-		
-		//Bind remote facade instance to a sirvice name using RMIRegistry
-		try {
-			IRemoteFacade remoteFacade = new RemoteFacade();			
-			Naming.rebind(name, remoteFacade);
-			System.out.println(" * eAuction server v3 '" + name + "' started!!");
-		} catch (Exception ex) {
-			System.err.println(" # eAuction Server Exception: " + ex.getMessage());
-			ex.printStackTrace();
-		}
-	}
+		System.out.println("Datanucleus + JDO example");
+		System.out.println("=========================");
 	
-	private static void initDB() {
+		//Create objects -  objects in memory
+		Usuarios user1= new Usuarios();
+		user1.setName("Ander Moldes");
+		user1.setEmail("amold");
+		user1.setContrasenya("1234");
+		
+		Usuarios user2 = new Usuarios();
+		user1.setName("Juan Sanz");
+		user1.setEmail("juanillo");
+		user1.setContrasenya("1234");
+		
+		Sesiones sesion1 = new Sesiones();
+		sesion1.setDeporte("Ciclismo");
+		sesion1.setDistancia(100);
+		sesion1.setFecha_inicio(new Date("11-12-2001"));
+		sesion1.setHora_inicio("13:00");
+		sesion1.setDuracion(4);
+		sesion1.setNumber(0);
+		sesion1.setPropietario(user1);
+		user1.addSesiones(sesion1);
+		
+		Sesiones sesion2 = new Sesiones();
+		sesion2.setDeporte("Correr");
+		sesion2.setDistancia(10);
+		sesion2.setFecha_inicio(new Date("11-12-2004"));
+		sesion2.setHora_inicio("11:00");
+		sesion2.setDuracion(3);
+		sesion2.setNumber(1);
+		sesion2.setPropietario(user2);
+		user2.addSesiones(sesion2);
+
+		Retos reto1 = new Retos();
+		reto1.setDeporte("Ciclismo");
+		reto1.setDistanciaObjetivo(100);
+		reto1.setFecha_inicio(new Date("11-12-2001"));
+		reto1.setFecha_fin(new Date("18-12-2001"));
+		reto1.setName("Tour Ispaster");
+		reto1.setNumber(2);
+		reto1.setUsuario(user1);
+		
+		Retos reto2 = new Retos();
+		reto2.setDeporte("Correr");
+		reto2.setDistanciaObjetivo(20);
+		reto2.setFecha_inicio(new Date("11-12-2009"));
+		reto2.setFecha_fin(new Date("18-12-2009"));
+		reto2.setName("Lekeitio Run");
+		reto2.setNumber(3);
+		reto2.setUsuario(user2);
+
+		
+								
+		// Load Persistence Manager Factory - referencing the Persistence Unit defined in persistence.xml
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		// Persistence Manager
+		PersistenceManager pm = null;
+		//Transaction to group DB operations
+		Transaction tx = null;		
+		
 		try {
-			//Create Usuarios
-			Usuario user0 = new Usuario();
-			user0.setEmail("thomas.e2001@gmail.com");
-			user0.setName("Thomas");
-			String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex("$!9PhNz,");
-			user0.setContrasenya(sha1);			
-							
-			Usuario user1 = new Usuario();
-			user1.setEmail("sample@gmail.com");
-			user1.setName("buyer33");
-			sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex("hqc`}3Hb");			
-			user1.setContrasenya(sha1);
+			System.out.println("- Store objects in the DB");			
+			//Get the Persistence Manager
+			pm = pmf.getPersistenceManager();
+			//Obtain the current transaction
+			tx = pm.currentTransaction();		
 			
-			Usuario user2 = new Usuario();
-			user2.setEmail("troyaikman08@hotmail.com");
-			user2.setName("troyaikman08");
-			sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex("RR$dW69N");			
-			user2.setContrasenya(sha1);
+			//Start the transaction
+			tx.begin();
 			
-			//Create Retos
-			Reto RetoCorrer = new Reto();
-			RetoCorrer.setName("Correr");	
-			RetoCorrer.setDistanciaObjetivo(100);
-			Reto RetoFutbol = new Reto();
-			RetoFutbol.setName("Jugar Futbol");		
-			RetoFutbol.setDeporte("Futbol");;
-			Reto RetoGimnasio = new Reto();
-			RetoGimnasio.setName("Ir al gimnasio");			
+			pm.makePersistent(user1);
+			pm.makePersistent(user2);			
+			
+			//End the transaction
+			tx.commit();
+			
+			System.out.println("    - " + sesion1.getTitulo() + "($ " + sesion2.getTitulo() + ")");
 
-			//Create Sesion
-			Sesion sesion1 = new Sesion();
-			sesion1.setNumber(1);
-			sesion1.setDuracion(2);
-			sesion1.setPropietario(user0);
-			sesion1.setTitulo("Entrenamiento");;
-			
-			user0.addSesiones(sesion1);
-			user1.addSesiones(sesion1);
-			
-			
-						
-			//Save Users in the DB
-			UsuarioDAO.getInstance().save(user0);
-			UsuarioDAO.getInstance().save(user1);
-			UsuarioDAO.getInstance().save(user2);
 		} catch (Exception ex) {
-			System.out.println(" $ Error initializing data base:" + ex.getMessage());
-		}			
-	}
+			System.err.println(" $ Error storing objects in the DB: " + ex.getMessage());
+			ex.printStackTrace();
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+			
+			if (pm != null && !pm.isClosed()) {
+				pm.close();
+			}
+		}
+		
+		try {
+			System.out.println("- Retrieving all the Sessions using an 'Extent'...");			
+			//Get the Persistence Manager
+			pm = pmf.getPersistenceManager();
+			//Obtain the current transaction
+			tx = pm.currentTransaction();		
+			//Start the transaction
+			tx.begin();
+		
+			Extent<Sesiones> extent = pm.getExtent(Sesiones.class, true);
+			
+			for (Sesiones session : extent) {
+				System.out.println(" -> " + session);
+			}
+			//Notice the change in the accounts' balances
+			//End the transaction
+			tx.commit();
+		} catch (Exception ex) {
+			System.err.println(" $ Error retrieving accounts using an 'Extent': " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+			
+			if (pm != null && !pm.isClosed()) {
+				pm.close();
+			}
+		}
 
+		try {
+			System.out.println("- Retrieving propietary of sesion with a 'Query'...");			
+			//Get the Persistence Manager
+			pm = pmf.getPersistenceManager();
+			//Obtain the current transaction
+			tx = pm.currentTransaction();		
+			//Start the transaction
+			tx.begin();
+
+			Query<Sesiones> query = pm.newQuery(Sesiones.class);
+			
+			@SuppressWarnings("unchecked")
+			List<Sesiones> sesiones = (List<Sesiones>) query.execute();
+
+			//End the transaction
+			tx.commit();
+			
+			for (Sesiones sesion : sesiones) {
+				System.out.println("  -> " + sesion.getPropietario());
+			}
+		} catch (Exception ex) {
+			System.err.println(" $ Error retrieving accounts using a 'Query': " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+			
+			if (pm != null && !pm.isClosed()) {
+				pm.close();
+			}
+		}
+
+		try {
+			System.out.println("- Deleting 'Session -> Propietario' relation...");			
+			//Get the Persistence Manager
+			pm = pmf.getPersistenceManager();
+			//Obtain the current transaction
+			tx = pm.currentTransaction();		
+			//Start the transaction
+			tx.begin();
+
+			Query<Sesiones> query = pm.newQuery(Sesiones.class);
+			@SuppressWarnings("unchecked")
+			List<Sesiones> sessions = (List<Sesiones>) query.execute();
+			
+			for (Sesiones ses : sessions) {
+				System.out.println("  -> Retrieved user: " + ses.getTitulo());
+				System.out.println("     + Removing user from the sessions ... ");
+				//ses.removeSession();
+			}
+			
+			//End the transaction
+			tx.commit();
+		} catch (Exception ex) {
+			System.err.println(" $ Error deleting 'User->Address' relation: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+			
+			if (pm != null && !pm.isClosed()) {
+				pm.close();
+			}
+		}
+
+		try {
+			System.out.println("- Cleaning the DB...");			
+			//Get the Persistence Manager
+			pm = pmf.getPersistenceManager();
+			//Obtain the current transaction
+			tx = pm.currentTransaction();
+			//Start the transaction
+			tx.begin();
+			
+			//Delete users from DB
+			// As we are considering accounts as dependents on user - CASCADING BEHAVIOUR - ACCOUNTS DELETED
+			Query<Usuarios> query1 = pm.newQuery(Usuarios.class);
+			System.out.println(" * '" + query1.deletePersistentAll() + "' users and their accounts deleted from the DB.");
+			//Delete addresses from DB
+			Query<Sesiones> query2 = pm.newQuery(Sesiones.class);
+			System.out.println(" * '" + query2.deletePersistentAll() + "' addresses deleted from the DB.");
+			
+			//End the transaction
+			tx.commit();
+		} catch (Exception ex) {
+			System.err.println(" $ Error cleaning the DB: " + ex.getMessage());
+			ex.printStackTrace();
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+			
+			if (pm != null && !pm.isClosed()) {
+				pm.close();
+			}
+		}
+
+		System.out.println("End of the Datanucleus + JDO example");
+		System.out.println("====================================");	
+	}
 }

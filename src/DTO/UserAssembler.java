@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import Dominio.Sesion;
-import Dominio.Usuario;
+import Dominio.Sesiones;
+import Dominio.Usuarios;
 
 //This class is part of the DTO pattern. It also implements Singleton Pattern.
 public class UserAssembler {
@@ -22,7 +22,7 @@ public class UserAssembler {
 		return instance;
 	}
 
-	public UserDTO userToDTO(Usuario user) {
+	public UserDTO userToDTO(Usuarios user) {
 		UserDTO dto = new UserDTO();
 		
 		dto.setEmail(user.getEmail());
@@ -33,10 +33,10 @@ public class UserAssembler {
 		dto.setFrecuencia(user.getFrecuencia());
 		return dto;
 	}
-	public List<UserDTO> categoryToDTO(List<Usuario> categories) {		
+	public List<UserDTO> categoryToDTO(List<Usuarios> categories) {		
 		List<UserDTO> dtos = new ArrayList<>();
 		
-		for (Usuario category : categories) {
+		for (Usuarios category : categories) {
 			dtos.add(this.userToDTO(category));
 		}
 		

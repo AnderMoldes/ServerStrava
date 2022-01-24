@@ -3,7 +3,7 @@ package DTO;
 import java.util.ArrayList;
 import java.util.List;
 
-import Dominio.Reto;
+import Dominio.Retos;
 public class RetoAssembler {	
 	private static RetoAssembler instance;
 
@@ -17,7 +17,7 @@ public class RetoAssembler {
 		return instance;
 	}
 
-	public RetoDTO articleToDTO(Reto article) {
+	public RetoDTO articleToDTO(Retos article) {
 		RetoDTO dto = new RetoDTO();
 		
 		dto.setNumber(article.getNumber());
@@ -29,10 +29,10 @@ public class RetoAssembler {
 		return dto;
 	}
 	
-	public ArrayList<RetoDTO> retoToDTO(List<Reto> articles) {
+	public ArrayList<RetoDTO> retoToDTO(List<Retos> articles) {
 		ArrayList<RetoDTO> dtos = new ArrayList<>();
 		
-		for (Reto article : articles) {
+		for (Retos article : articles) {
 			dtos.add(this.articleToDTO(article));
 		}
 		
