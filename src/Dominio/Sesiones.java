@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
 import javax.jdo.annotations.Join;
 
 @PersistenceCapable
 public class Sesiones {
 	private int number;
+	@PrimaryKey
 	private String titulo;	
 	private String deporte;	
 	private double distancia;	

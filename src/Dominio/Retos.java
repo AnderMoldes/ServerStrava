@@ -2,10 +2,12 @@ package Dominio;
 
 import java.util.Date;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable
 public class Retos {
 	private int number;
+	@PrimaryKey
 	private String name;	
 	private Date fecha_inicio;
 	private Date fecha_fin;

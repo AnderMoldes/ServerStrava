@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	//Data structure for manage Server State
 	private Map<Long, Usuarios> serverState = new HashMap<>();
+	private Map<Long, Retos> serverState2 = new HashMap<>();
+	private Map<Long, Sesiones> serverState3 = new HashMap<>();
 	
 	//TODO: Remove this instances when Singleton Pattern is implemented
 	private LoginAppService loginService = new LoginAppService();
@@ -121,4 +124,45 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			throw new RemoteException("comprobar() fails!");
 		}
 	}
+	public long registro(String email, String name, Date fecha_nac, double peso, String contrasenya, String frec) throws RemoteException{
+		Usuarios usuario = loginService.registro(email, name, fecha_nac, peso, contrasenya, frec);
+		System.out.println(" * RemoteFacade registro(): " + email + " / " + contrasenya);
+		if (usuario != null) {
+			Long token = Calendar.getInstance().getTimeInMillis();
+			this.serverState.put(token, usuario);		
+			return(token);	
+		}else {
+			throw new RemoteException("User is in the database!");
+		}
+	}
+
+	public long crearReto(int number, String name, Date fecha_ini, Date fecha_fin, double distanciaObjetivo,
+			String deporte) throws RemoteException {
+		// TODO Auto-generated method stub
+		Retos reto = retoService.crearReto(number, name, fecha_ini, fecha_fin, distanciaObjetivo, deporte);
+		System.out.println(" * RemoteFacade crearReto(): " + number + " / " + name);
+		if (reto != null) {
+			Long token = Calendar.getInstance().getTimeInMillis();
+			this.serverState2.put(token, reto);		
+			return(token);	
+		}else {
+			throw new RemoteException("Reto is in the database!");
+		}
+	}
+
+	@Override
+	public long crearSesion(int number, String titulo, String deporte, double distancia, Date fecha_ini, String hora_ini,
+			double duracion) throws RemoteException {
+		// TODO Auto-generated method stub
+		Sesiones sesion = sesionService.crearSesion(number, titulo, fecha_ini, hora_ini, distancia, deporte, duracion);
+		System.out.println(" * RemoteFacade crearSesion(): " + number + " / " + titulo);
+		if (sesion != null) {
+			Long token = Calendar.getInstance().getTimeInMillis();
+			this.serverState3.put(token, sesion);		
+			return(token);	
+		}else {
+			throw new RemoteException("Sesion is in the database!");
+		}
+	}
+	
 }
