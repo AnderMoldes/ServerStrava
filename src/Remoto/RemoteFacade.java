@@ -20,6 +20,7 @@ import Servicios.LoginAppService;
 import Servicios.RetoAppService;
 import Servicios.SesiosAppService;
 
+
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {	
 	private static final long serialVersionUID = 1L;
 
@@ -88,18 +89,16 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	@Override
-	public ArrayList<RetoDTO> getRetos() throws RemoteException {
+	public List<RetoDTO> getRetos() throws RemoteException {
 		System.out.println(" * RemoteFacade getRetos()");
 		
 		//Get Categories using BidAppService
-		List<Retos> categories = new ArrayList<Retos>();
-		categories.add(retoService.getReto());
-		
-		if (categories != null) {
+		ArrayList<Retos> retos = RetoAppService.getInstance().getReto();
+		if (retos != null) {
 			//Convert domain object to DTO
-			return RetoAssembler.getInstance().retoToDTO(categories);
+			return RetoAssembler.getInstance().retosToDTO(retos);
 		} else {
-			throw new RemoteException("getCategories() fails!");
+			throw new RemoteException("getRetos() fails!");
 		}
 	}
 	public long loginGoogle(String email, String password) throws RemoteException {
@@ -124,18 +123,6 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			throw new RemoteException("comprobar() fails!");
 		}
 	}
-	public long registro(String email, String name, Date fecha_nac, double peso, String contrasenya, String frec) throws RemoteException{
-		Usuarios usuario = loginService.registro(email, name, fecha_nac, peso, contrasenya, frec);
-		System.out.println(" * RemoteFacade registro(): " + email + " / " + contrasenya);
-		if (usuario != null) {
-			Long token = Calendar.getInstance().getTimeInMillis();
-			this.serverState.put(token, usuario);		
-			return(token);	
-		}else {
-			throw new RemoteException("User is in the database!");
-		}
-	}
-
 	public long crearReto(int number, String name, Date fecha_ini, Date fecha_fin, double distanciaObjetivo,
 			String deporte) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -162,6 +149,21 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			return(token);	
 		}else {
 			throw new RemoteException("Sesion is in the database!");
+		}
+	}
+
+	@Override
+	public long registro(String email, String name, Date fecha_nac, double peso, String contrasenya, String frec, String modoRe)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		Usuarios usuario = loginService.registro(email, name, fecha_nac, peso, contrasenya, frec, modoRe);
+		System.out.println(" * RemoteFacade registro(): " + email + " / " + contrasenya);
+		if (usuario != null) {
+			Long token = Calendar.getInstance().getTimeInMillis();
+			this.serverState.put(token, usuario);		
+			return(token);	
+		}else {
+			throw new RemoteException("User is in the database!");
 		}
 	}
 	

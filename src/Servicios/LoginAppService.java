@@ -36,7 +36,7 @@ public class LoginAppService {
 	public String comprobar() {
 		return LoginGateway.getInstance().comprobar();		
 	}
-	public Usuarios registro(String email, String name, Date fecha_nac, double peso, String contrasenya, String frec) {
+	public Usuarios registro(String email, String name, Date fecha_nac, double peso, String contrasenya, String frec, String modoRe) {
 		// TODO Auto-generated method stub
 		Usuarios usuario = new Usuarios();
 		if(UsuarioDAO.getInstance().find(email)!= null) {
@@ -49,6 +49,7 @@ public class LoginAppService {
 			usuario.setFrecuencia(frec);
 			usuario.setName(name);
 			usuario.setPeso(peso);
+			usuario.setModoRegistro(modoRe);
 			UsuarioDAO.getInstance().save(usuario);
 			return usuario;
 		}

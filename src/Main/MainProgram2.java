@@ -56,6 +56,7 @@ public class MainProgram2 {
 		user1.setFecha_ncto(new Date());
 		user1.setFrecuencia("90");
 		user1.setPeso(100.0);
+		user1.setModoRegistro("Strava");
 		
 		Usuarios user2 = new Usuarios();
 		user2.setName("Juan Sanz");
@@ -64,6 +65,7 @@ public class MainProgram2 {
 		user2.setFecha_ncto(new Date());
 		user2.setFrecuencia("90");
 		user2.setPeso(100.0);
+		user2.setModoRegistro("Strava");
 		
 		Sesiones sesion1 = new Sesiones();
 		sesion1.setDeporte("Ciclismo");

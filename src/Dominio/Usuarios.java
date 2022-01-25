@@ -17,6 +17,7 @@ public class Usuarios {
 	private double peso;
 	private String contrasenya;
 	private String frecuencia;
+	private String modoRegistro;
 
 	@Join
 	@Persistent(mappedBy="propietario", dependentElement="true")
@@ -94,6 +95,14 @@ public class Usuarios {
 		if (sesion != null && !this.sesiones.contains(sesion)) {
 			this.sesiones.add(sesion);
 		}
+	}
+	public String getModoRegistro() {
+		return modoRegistro;
+	}
+
+
+	public void setModoRegistro(String modoRegistro) {
+		this.modoRegistro = modoRegistro;
 	}
 	
 		

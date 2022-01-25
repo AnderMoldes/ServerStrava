@@ -70,6 +70,6 @@
 	<target name="6.export" depends="1.compile" description="Export classes into a .jar file">
 		<delete dir="${dist.dir}"/>
 		<mkdir dir="${dist.dir}"/>
-		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/Remoto/I**.class, **/DTO/**.class, **/Gateway/L**.class, **/Servicios/**.class, **/Dominio/**.class"/>
+		<jar destfile="${dist.dir}/${export.file}" basedir="${bin.dir}" includes="**/Remoto/I**.class, **/DTO/**.class, **/Gateway/L**.class, **/Servicios/**.class, **/Dominio/**.class, **/DAO/**.class"/>
 	</target>
 </project>

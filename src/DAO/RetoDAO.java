@@ -34,11 +34,11 @@ public class RetoDAO extends DataAccessObjectBase implements IDataAccessObject<R
 	}
 
 	@Override
-	public List<Retos> getAll() {				
+	public ArrayList<Retos> getAll() {				
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
-		List<Retos> articles = new ArrayList<>();
+		ArrayList<Retos> retos = new ArrayList<>();
 		
 		try {
 			tx.begin();
@@ -46,7 +46,7 @@ public class RetoDAO extends DataAccessObjectBase implements IDataAccessObject<R
 			Extent<Retos> extent = pm.getExtent(Retos.class, true);
 
 			for (Retos category : extent) {
-				articles.add(category);
+				retos.add(category);
 			}
 
 			tx.commit();
@@ -60,7 +60,7 @@ public class RetoDAO extends DataAccessObjectBase implements IDataAccessObject<R
 			pm.close();
 		}
 
-		return articles;
+		return retos;
 	}
 
 	@Override

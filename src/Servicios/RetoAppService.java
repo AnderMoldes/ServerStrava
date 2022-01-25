@@ -1,6 +1,8 @@
 package Servicios;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import DAO.RetoDAO;
 import DAO.UsuarioDAO;
@@ -9,16 +11,17 @@ import Dominio.Usuarios;
 
 
 public class RetoAppService {
-	public Retos getReto() {
+	private static RetoAppService instance;
+	public static RetoAppService getInstance() {
+		if (instance == null) {
+			instance = new RetoAppService();
+		}
+		
+		return instance;
+	}
+	public ArrayList<Retos> getReto() {
 		//TODO: Get User using DAO and check 		
-		Retos reto = new Retos();
-		reto.setDeporte("Correr");
-		reto.setDistanciaObjetivo(100);
-		reto.setFecha_inicio(new Date(2021-12-11));
-		reto.setFecha_fin(new Date(2022-01-11));
-		reto.setName("100 km");
-		reto.setNumber(1);
-		return reto;
+		return RetoDAO.getInstance().getAll();
 	}
 
 	public Retos crearReto(int number, String name, Date fecha_ini, Date fecha_fin, double distanciaObjetivo,

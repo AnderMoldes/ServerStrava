@@ -17,7 +17,7 @@ public class RetoAssembler {
 		return instance;
 	}
 
-	public RetoDTO articleToDTO(Retos article) {
+	public RetoDTO retoToDTO(Retos article) {
 		RetoDTO dto = new RetoDTO();
 		
 		dto.setNumber(article.getNumber());
@@ -26,14 +26,15 @@ public class RetoAssembler {
 		dto.setFecha_fin(article.getFecha_fin());
 		dto.setDistanciaObjetivo(article.getDistanciaObjetivo());
 		dto.setDeporte(article.getDeporte());
+	
 		return dto;
 	}
 	
-	public ArrayList<RetoDTO> retoToDTO(List<Retos> articles) {
-		ArrayList<RetoDTO> dtos = new ArrayList<>();
+	public List<RetoDTO> retosToDTO(List<Retos> retos) {
+		List<RetoDTO> dtos = new ArrayList<>();
 		
-		for (Retos article : articles) {
-			dtos.add(this.articleToDTO(article));
+		for (Retos reto : retos) {
+			dtos.add(this.retoToDTO(reto));
 		}
 		
 		return dtos;		
